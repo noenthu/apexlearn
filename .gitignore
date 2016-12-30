@@ -37,6 +37,7 @@ mm.log
 # vim-force-com
 .vim-force.com/
 vim-force.com-scratch.txt
+tags
 
 # OSX-specific exclusions
 .[dD][sS]_[sS]tore
