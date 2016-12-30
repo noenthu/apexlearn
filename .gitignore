@@ -5,6 +5,7 @@
 .metadata
 build.properties
 config
+*.swp
 
 # Apex Log as optional
 apex-scripts/log
