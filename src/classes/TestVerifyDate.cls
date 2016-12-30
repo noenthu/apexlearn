@@ -14,7 +14,7 @@ private class TestVerifyDate  {
 	 */
     @isTest
 	static void dateWithin30 () {
-		Date dateToCompare = Date.today();
+        Date dateToCompare = Date.today();
         Date dateCompareWithin30 = dateToCompare.addDays(29);
         Date dateCompareGreater30 = dateToCompare.addDays(31);
         Date dateCompareLessDate1 = dateToCompare.addDays(-2);
