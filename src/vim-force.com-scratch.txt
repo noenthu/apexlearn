@@ -1,2 +1,45 @@
 /* This is a scratch file */
 
+// Add account and related contacts
+Account acct = new Account(
+        Name='SFDC',
+        Phone='(415)555-1212',
+        NumberOfEmployees=50,
+        BillingCity='San Francisco');
+insert acct;
+
+// Once account is inserted, the sObject has an ID
+ID acctId = acct.ID;
+
+// Add a contact to this account
+Contact con = new Contact(
+        FirstName='Carol',
+        LastName='Ruiz',
+        Phone='(415)555-1212',
+        Department='Wingo',
+        AccountId=acctId);
+insert con;
+
+// Add an account with no contact
+Account acct2 = new Account(
+        Name='The SFDC Query Man',
+        Phone='(310)555-1213',
+        NumberOfEmployees=50,
+        BillingCity='Los Angeles',
+        Description='Expert in wing technologies.');
+insert acct2;
+
+// SOSL example
+List<List<sObject>> searchList = [FIND 'Wingo OR SFDC' IN ALL FIELDS RETURNING Account(Name),
+    Contact(FirstName,LastName)];
+Account[] searchAccounts = (Account[])searchList[0];
+Contact[] searchContacts = (Contact[])searchList[1];
+
+System.debug('Found the following Accounts.');
+for (Account a: searchAccounts) {
+    System.debug(a.Name);
+}
+System.debug('Found the following contacts.');
+for (Contact c: searchContacts) {
+    System.debug(c.LastName + ', ' + c.FirstName);
+}
