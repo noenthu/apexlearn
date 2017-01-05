@@ -5,7 +5,7 @@ public with sharing class AccountHandler {
         try{
             insert acct;
         } catch(DmlException e) {
-            System.debug('DML Exception encountered: ' + e.getMessage());
+            System.debug('DML Exception');
             acct = null;
         }
         return acct;
