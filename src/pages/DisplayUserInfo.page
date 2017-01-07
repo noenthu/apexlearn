@@ -1,7 +1,7 @@
 <apex:page >
     <apex:pageBlock title="thistitle">
         <apex:pageBlockSection columns="1">
-            {! $User.FirstName & ' ' & $User.LastName}
+            {! $User.FirstName}
         </apex:pageBlockSection>
     </apex:pageBlock>
 </apex:page>
