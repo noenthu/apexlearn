@@ -40,6 +40,9 @@ mm.log
 #vim-force.com-scratch.txt
 tags
 
+# unpacked resources folder
+resources_unpacked
+
 # OSX-specific exclusions
 .[dD][sS]_[sS]tore
 
