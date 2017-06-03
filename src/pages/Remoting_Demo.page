@@ -1,0 +1,32 @@
+<apex:page controller="Remoting_Demo_Controller">
+
+    <script type="text/javascript">
+        window.addEventListener('load', function(e) {
+            new Promise((resolve, reject) => {
+                Remoting_Demo_Controller.getInfo((result, event) => {
+                    if (event.status) {
+                        resolve(result);
+                    } else {
+                        reject(event.message);
+                    }
+                });
+            })
+            .then((records) => {
+                console.log('success');
+                console.log(records);
+                Object.keys(records).forEach((key) => {
+                    console.log(records[key]);
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        });
+    </script>
+
+    <h1>Accounts</h1>
+    <div id="errors">
+    </div>
+
+</apex:page>

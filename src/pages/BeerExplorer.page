@@ -1,0 +1,40 @@
+<apex:page controller="BeerRemoter" docType="html" showHeader="true" applyBodyTag="false" standardStylesheets="false">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <link href="{!URLFOR($Resource.explorer, 'bootstrap/css/mybootstrap.css')}" rel="stylesheet"/>
+    <link href="{!URLFOR($Resource.explorer, 'nouislider/jquery.nouislider.min.css')}" rel="stylesheet"/>
+    <link href="{!URLFOR($Resource.explorer, 'css/styles.css')}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div id="explorer" class="bootstrap-wrapper"  style="padding-top:20px;"></div>
+
+<script>
+    function findBeers(searchKey, minAlcohol, maxAlcohol, page) {
+		var deferred = $.Deferred();
+        Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.BeerRemoter.findAll}', searchKey, minAlcohol, maxAlcohol, page,
+			function(result, event) {
+				console.log(event.status);
+                if (event.status) {
+                	console.log(result);
+                    deferred.resolve(result);
+				} else {
+                	deferred.reject(event.message);
+                    alert(event.message);
+                }
+			},
+            {escape: true}
+		);
+        return deferred.promise();
+	};
+</script>    
+
+<script src="{!URLFOR($Resource.explorer, 'lib/react-with-addons.js')}"></script>
+<script src="{!URLFOR($Resource.explorer, 'lib/jquery.js')}"></script>
+<script src="{!URLFOR($Resource.explorer, 'nouislider/jquery.nouislider.all.min.js')}"></script>
+<script src="{!URLFOR($Resource.explorer, 'js/build/app.js')}"></script>
+</body>
+</apex:page>
