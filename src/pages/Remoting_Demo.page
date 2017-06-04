@@ -14,8 +14,11 @@
             .then((records) => {
                 console.log('success');
                 console.log(records);
-                Object.keys(records).forEach((key) => {
-                    console.log(records[key]);
+                //Object.keys(records).forEach((key) => {
+                //    console.log(records[key]);
+                //});
+                records.forEach((record) => {
+                    console.log(record);
                 });
             })
             .catch((error) => {
@@ -25,8 +28,12 @@
         });
     </script>
 
-    <h1>Accounts</h1>
+    <h1>Limits</h1>
+
     <div id="errors">
+    </div>
+    
+    <div id="limits">
     </div>
 
 </apex:page>

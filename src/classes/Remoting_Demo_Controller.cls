@@ -12,79 +12,94 @@ global class Remoting_Demo_Controller {
         return accounts;
     }
 
+    public class LimitWrapper {
+        String limitName;
+        Integer usedLimit;
+        Integer availableLimit;
+
+        public LimitWrapper(String limitName, Integer usedLimit, Integer availableLimit) {
+            this.limitName = limitName;
+            this.usedLimit = usedLimit;
+            this.availableLimit = availableLimit;
+        }
+    }
+
+    private static final List<String> apexLimits = new List<String>{
+        'DMLStatements', 'AggregateQueries', 'AsyncCalls', 'CallOuts',
+            'CpuTime', 'DMLRows', 'EmailInvocations',
+            'FutureCalls', 'HeapSize', 'MobilePushApexCalls',
+            'Queries', 'QueryLocatorRows', 'QueryRows', 'QueueableJobs'};
 
 
     @RemoteAction
-    global static Map<String, Integer> getInfo() {
-        /*limits = ['DMLStatements', 'AggregateQueries', 'AsyncCalls',
-               'CallOuts', 'CpuTime', 'DMLRows', 'EmailInvications',
-               'FutureCalls', 'HeapSize', 'MobilePushApexCalls',
-               'Queries', 'QueryLocatorRows', 'QueryRows', 'QueueableJobs'];*/
+    //global static Map<String, Integer> getInfo() {
+    public static List<LimitWrapper> getInfo() {
+        //Map<String, Integer> myLimitsMap      = new Map<String, Integer>();
 
-        Map<String, Integer> myLimits      = new Map<String, Integer>();
+        List<LimitWrapper> myLimits = new List<LimitWrapper>{};
 
-        myLimits.put('DMLStatements', Limits.getDMLStatements());
-        myLimits.put('LimitDMLStatements', Limits.getLimitDMLStatements());
-        myLimits.put('AggregateQueries', Limits.getAggregateQueries());
-        myLimits.put('LimitAggregateQueries', Limits.getLimitAggregateQueries());
-        myLimits.put('AsyncCalls', Limits.getAsyncCalls());
-        myLimits.put('LimitAsyncCalls', Limits.getLimitAsyncCalls());
-        myLimits.put('CallOuts', Limits.getCallOuts());
-        myLimits.put('LimitCallOuts', Limits.getLimitCallOuts());
-        myLimits.put('CpuTime', Limits.getCpuTime());
-        myLimits.put('LimitCpuTime', Limits.getLimitCpuTime());
-        myLimits.put('DMLRows', Limits.getDMLRows());
-        myLimits.put('LimitDMLRows', Limits.getLimitDMLRows());
-        myLimits.put('EmailInvocations', Limits.getEmailInvocations());
-        myLimits.put('LimitEmailInvocations', Limits.getLimitEmailInvocations());
-        myLimits.put('FutureCalls', Limits.getFutureCalls());
-        myLimits.put('LimitFutureCalls', Limits.getLimitFutureCalls());
-        myLimits.put('HeapSize', Limits.getHeapSize());
-        myLimits.put('LimitHeapSize', Limits.getLimitHeapSize());
-        myLimits.put('MobilePushApexCalls', Limits.getMobilePushApexCalls());
-        myLimits.put('LimitMobilePushApexCalls', Limits.getLimitMobilePushApexCalls());
-        myLimits.put('Queries', Limits.getQueries());
-        myLimits.put('LimitQueries', Limits.getLimitQueries());
-        myLimits.put('QueryLocatorRows', Limits.getQueryLocatorRows());
-        myLimits.put('LimitQueryLocatorRows', Limits.getLimitQueryLocatorRows());
-        myLimits.put('QueryRows', Limits.getQueryRows());
-        myLimits.put('LimitQueryRows', Limits.getLimitQueryRows());
-        myLimits.put('QueueableJobs', Limits.getQueueableJobs());
-        myLimits.put('LimitQueueableJobs', Limits.getLimitQueueableJobs());
+        for (String apexLimit : apexLimits) {
+            if (apexLimit == 'DMLStatements') {
+                myLimits.add(new LimitWrapper('DMLStatements', 
+                            Limits.getDMLStatements(),
+                            Limits.getLimitDMLStatements()));
+            } else if (apexLimit == 'AggregateQueries') {
+                myLimits.add(new LimitWrapper('AggregateQueries', 
+                            Limits.getAggregateQueries(),
+                            Limits.getLimitAggregateQueries()));
+            } else if (apexLimit == 'AsyncCalls') {
+                myLimits.add(new LimitWrapper('AsyncCalls', 
+                            Limits.getAsyncCalls(),
+                            Limits.getLimitAsyncCalls()));
+            } else if (apexLimit == 'CallOuts') {
+                myLimits.add(new LimitWrapper('CallOuts', 
+                            Limits.getCallOuts(),
+                            Limits.getLimitCallOuts()));
+            } else if (apexLimit == 'CpuTime') {
+                myLimits.add(new LimitWrapper('CpuTime', 
+                            Limits.getCpuTime(),
+                            Limits.getLimitCpuTime()));
+            } else if (apexLimit == 'DMLRows') {
+                myLimits.add(new LimitWrapper('DMLRows', 
+                            Limits.getDMLRows(),
+                            Limits.getLimitDMLRows()));
+            } else if (apexLimit == 'EmailInvocations') {
+                myLimits.add(new LimitWrapper('EmailInvocations', 
+                            Limits.getEmailInvocations(),
+                            Limits.getLimitEmailInvocations()));
+            } else if (apexLimit == 'FutureCalls') {
+                myLimits.add(new LimitWrapper('FutureCalls', 
+                            Limits.getFutureCalls(),
+                            Limits.getLimitFutureCalls()));
+            } else if (apexLimit == 'HeapSize') {
+                myLimits.add(new LimitWrapper('HeapSize', 
+                            Limits.getHeapSize(),
+                            Limits.getLimitHeapSize()));
+            } else if (apexLimit == 'MobilePushApexCalls') {
+                myLimits.add(new LimitWrapper('MobilePushApexCalls', 
+                            Limits.getMobilePushApexCalls(),
+                            Limits.getLimitMobilePushApexCalls()));
+            } else if (apexLimit == 'Queries') {
+                myLimits.add(new LimitWrapper('Queries', 
+                            Limits.getQueries(),
+                            Limits.getLimitQueries()));
+            } else if (apexLimit == 'QueryLocatorRows') {
+                myLimits.add(new LimitWrapper('QueryLocatorRows', 
+                            Limits.getQueryLocatorRows(),
+                            Limits.getLimitQueryLocatorRows()));
+            } else if (apexLimit == 'QueryRows') {
+                myLimits.add(new LimitWrapper('QueryRows', 
+                            Limits.getQueryRows(),
+                            Limits.getLimitQueryRows()));
+            } else if (apexLimit == 'QueueableJobs') {
+                myLimits.add(new LimitWrapper('QueueableJobs', 
+                            Limits.getQueueableJobs(),
+                            Limits.getLimitQueueableJobs()));
+            } else {
+                System.debug('this cannot be');
+            }
+        }
 
-        /*Integer myDMLStatements            = Limits.getDMLStatements();
-        Integer myLimitDMLStatements       = Limits.getLimitDMLStatements();
-        Integer myAggQueries               = Limits.getAggregateQueries();
-        Integer myLimitAggQueries          = Limits.getLimitAggregateQueries();
-        Integer myAsyncCalls               = Limits.getAsyncCalls();
-        Integer myLimitAsyncCalls          = Limits.getLimitAsyncCalls();
-        Integer myCallouts                 = Limits.getCallOuts();
-        Integer myLimitCallouts            = Limits.getLimitCallOuts();
-        Integer myCpuTime                  = Limits.getCpuTime();
-        Integer myLimitCpuTime             = Limits.getLimitCpuTime();
-        Integer myDMLRows                  = Limits.getDMLRows();
-        Integer myLimitDMLRows             = Limits.getLimitDMLRows();
-        Integer myEmailInvocations         = Limits.getEmailInvocations();
-        Integer myLimitEmailInvocations    = Limits.getLimitEmailInvocations();
-        Integer myFutureCalls              = Limits.getFutureCalls();
-        Integer myLimitFutureCalls         = Limits.getLimitFutureCalls();
-        Integer myHeapSize                 = Limits.getHeapSize();
-        Integer myLimitHeapSize            = Limits.getLimitHeapSize();
-        Integer myMobilePushApexCalls      = Limits.getMobilePushApexCalls();
-        Integer myLimitMobilePushApexCalls = Limits.getLimitMobilePushApexCalls();
-        Integer myQueries                  = Limits.getQueries();
-        Integer myLimitQueries             = Limits.getLimitQueries();
-        Integer myQueryLocatorRows         = Limits.getQueryLocatorRows();
-        Integer myLimitQueryLocatorRows    = Limits.getLimitQueryLocatorRows();
-        Integer myQueryRows                = Limits.getQueryRows();
-        Integer myLimitQueryRows           = Limits.getLimitQueryRows();
-        Integer myQueueableJobs            = Limits.getQueueableJobs();
-        Integer myLimitQueueableJobs       = Limits.getLimitQueueableJobs();
-
-        myLimits.put('DMLStatements', myDMLStatements);
-        myLimits.put('LimitDMLStatements', myLimitDMLStatements);
-        myLimits.put('AsyncCalls', myAsyncCalls);
-        myLimits.put('LimitAsyncCalls', myLimitAsyncCalls);*/
         return myLimits;
     }
 
