@@ -136,3 +136,17 @@
 //System.debug(myQueueableJobs);
 //Integer myLimitQueueableJobs = Limits.getLimitQueueableJobs();
 //System.debug(myLimitQueueableJobs);
+
+String sessionID = UserInfo.getSessionId();
+system.debug(sessionId);
+Http http = new Http();
+HttpRequest request = new HttpRequest();
+request.setEndpoint('https://na35.salesforce.com/services/data/v37.0/limits/');
+request.setMethod('GET');
+request.setHeader('Authorization', 'Bearer '+sessionID);
+//request.setHeader('Authorization: Bearer <token>');
+HttpResponse response = http.send(request);
+if (response.getStatusCode() == 200) {
+    System.debug('success');
+    System.debug(response.getBody());
+}
