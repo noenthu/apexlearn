@@ -1,0 +1,29 @@
+<apex:page controller="React_Demo_Controller" showHeader="false" sidebar="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false">
+<html>
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+</head>
+<body>
+    <!-- Remote Objects definition to set accessible sObjects and fields -->
+    <!--<apex:remoteObjects >
+        <apex:remoteObjectModel name="Post__c" jsShorthand="Post" 
+            fields="Id, Name, Categories__c, Content__c">
+        </apex:remoteObjectModel>
+    </apex:remoteObjects> -->
+    <script type="text/javascript">
+        var __sfdcSessionId = '{!GETSESSIONID()}';
+        console.log(__sfdcSessionId);
+    </script>
+
+    <!-- reactjs -->
+    <div id="root">
+	</div>
+    <!--Development to point to ngrok. Also update the ngrok's url to match your localhost's url-->
+
+    <!-- Uncomment and use the below for production to point to final static resource "reactreduxblog"(bundle.js) -->
+    <script src="{!URLFOR($Resource.reacttest, 'static/js/bundle.js')}">
+	</script>
+   
+  </body>
+</html>
+</apex:page>
