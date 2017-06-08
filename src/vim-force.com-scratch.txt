@@ -171,7 +171,7 @@ system.debug(objectNames.size());
 
 //Integer i = Database.countquery('select count() from Account');
 //System.debug(i);
-// runs into 101 query limit
+// //runs into 101 query limit
 //for (String objname : objectNames) {
 //    Integer i;
 //    String s = 'select count() from '+ objname;
