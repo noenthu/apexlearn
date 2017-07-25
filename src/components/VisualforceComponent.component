@@ -1,0 +1,9 @@
+<apex:component controller="VisualforceComponentController" access="global">
+    <apex:attribute name="caccountname" description="this is the account name from contact"  type="String" assignTo="{!accountName}" />
+    <apex:dataTable value="{!accounts}" var="s_accounts">
+        <apex:column >
+            <apex:facet name="header">Account Name</apex:facet>
+            {!s_accounts.Name}
+        </apex:column>
+    </apex:dataTable>
+</apex:component>
